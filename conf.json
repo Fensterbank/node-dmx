@@ -1,0 +1,121 @@
+{
+	"server": {
+		"listen_port": 8080,
+		"listen_host": "::",
+		"_uid": "www-data",
+		"_gid": "www-data",
+		"_comment1": "To drop privileges change the '_uid' and '_gid' keys to 'uid' and 'gid'.",
+		"_comment2": "On macOS uid and gid must be set in the launchd script."
+	},
+	"presets": [
+		{
+			"label": "Testlicht",
+			"values": {
+				"general": {
+					"13": 200
+				}
+			}
+		},
+		{
+			"label": "Natural",
+			"values": {
+				"general": {
+					"1": 16,
+					"2": 255,
+					"3": 0,
+					"4": 255,
+					"5": 190,
+					"6": 140,
+					"16": 16,
+					"17": 255,
+					"18": 0,
+					"19": 255,
+					"20": 190,
+					"21": 140
+				}
+			}
+		},
+		{
+			"label": "Worklight",
+			"values": {
+				"general": {
+					"1": 16,
+					"2": 130,
+					"3": 0,
+					"4": 255,
+					"5": 165,
+					"6": 0,
+					"16": 1,
+					"17": 255,
+					"18": 0,
+					"19": 255,
+					"20": 190,
+					"21": 140,
+					"22": 0,
+					"23": 0,
+					"24": 0,
+					"25": 255,
+					"26": 190,
+					"27": 140
+				}
+			}
+		},
+		{
+			"label": "Chill",
+			"values": {
+				"general": {
+					"1": 16,
+					"2": 255,
+					"3": 0,
+					"4": 255,
+					"5": 39,
+					"6": 0,
+					"16": 1,
+					"17": 255,
+					"18": 0,
+					"19": 255,
+					"20": 255,
+					"21": 0,
+					"22": 0,
+					"23": 0,
+					"24": 0,
+					"25": 128,
+					"26": 0,
+					"27": 255,
+					"32": 255,
+					"33": 60
+				}
+			}
+		},
+		{
+			"label": "Cinema",
+			"values": {
+				"general": {
+					"1": 16,
+					"2": 30,
+					"3": 0,
+					"4": 255,
+					"5": 39,
+					"6": 0,
+					"16": 0,
+					"32": 255,
+					"33": 0
+				}
+			}
+		}
+	],
+	"universes": {
+		"general": {
+			"output": {
+				"driver": "enttec-usb-dmx-pro",
+				"device": "/dev/ttyUSB0"
+			},
+			"devices": [
+				{
+					"type": "briteq-bt-theatre-60FC",
+					"address": 0
+				}
+			]
+		}
+	}
+}

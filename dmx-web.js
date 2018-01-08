@@ -9,6 +9,7 @@ var socketio = require('socket.io')
 var program  = require('commander')
 var DMX      = require('./dmx')
 var pliabAnim = require('./pliabAnim')
+var bodyParser = require('body-parser');
 var A        = DMX.Animation
 
 program
@@ -21,6 +22,8 @@ var	config = JSON.parse(fs.readFileSync(program.config, 'utf8'))
 
 function DMXWeb() {
 	var app    = express()
+	app.use(bodyParser.json());
+	
 	var server = http.createServer(app)
 	var io     = socketio.listen(server)
 
@@ -78,12 +81,25 @@ function DMXWeb() {
 			return
 		}
 
-		dmx.update(req.params.universe, req.body)
+		dmx.update(req.params.universe, req.body.state)
 		res.json({"state": dmx.universeToObject(req.params.universe)})
+	})
+
+	let runningAnimation = null;
+	app.post('/animation/stop', function(req, res) {
+		if (runningAnimation) {
+			runningAnimation.stop();
+			runningAnimation = null;
+		}
+		res.json({"success": true})
 	})
 
 	app.post('/animation/:universe', function(req, res) {
 		try {
+			if (runningAnimation) {
+				runningAnimation.stop();
+				runningAnimation = null;
+			}
 			var universe = dmx.universes[req.params.universe]
 
 			// preserve old states
@@ -97,7 +113,6 @@ function DMXWeb() {
 					stepTo = pliabAnim.convertToDMX(stepTo);
 				}
 				
-				console.log('stepTo', stepTo);
 				animation.add(
 					stepTo,
 					req.body[step].duration || 0,
@@ -106,6 +121,7 @@ function DMXWeb() {
 			}
 			animation.add(old, 0)
 			animation.run(universe)
+			runningAnimation = animation;
 			res.json({"success": true})
 		} catch(e) {
 			console.log(e)

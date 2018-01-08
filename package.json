@@ -17,11 +17,12 @@
 				"light control"
 		],
 		"dependencies": {
-				"serialport": "6.0.4",
-				"socket.io": "2.0.4",
+				"body-parser": "^1.18.2",
+				"commander": "2.12.2",
 				"connect": "3.6.5",
 				"express": "4.16.2",
-				"commander": "2.12.2"
+				"serialport": "6.0.4",
+				"socket.io": "2.0.4"
 		},
 		"licenses": [
 				{
